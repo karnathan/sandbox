@@ -1,2 +1,17 @@
 import numpy as np
 import pandas as pd
+from transformers import pipeline
+
+summarizer = pipeline("summarization", model="facebook/bart-large-xsum")
+
+ARTICLE = """John went to the store with his friend Marsha. She had
+recently mentioned how she loved flowers in the rain. John recounted a
+time when he could still see and his glaucoma was not as terrible. Marsha
+took her time with each flower, smelling each and every one as she joyously
+walked by. They stopped by a park to have some donuts and coffee. Marsha
+seemed hungrier than ever, as she was begging and bothering John for his
+last donut. John, unable to see Marsha, put his hand out to push her back.
+To his surprise, his friend Marsha was not his friend at all, but his seeing
+eye dog!"""
+
+print(summarizer(ARTICLE, min_length=5, do_sample=False))
